@@ -11,7 +11,7 @@
     "url": "git+https://github.com/0418wangweijie/wang-enum-vue.git"
   },
   "scripts": {
-    "build": "vite build"
+    "build": "rsbuild build"
   },
   "keywords": [
     "enum",
@@ -21,10 +21,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "vite": "^6.0.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1"
+    "@rsbuild/core": "^1.1.13",
+    "@rsbuild/plugin-vue": "^1.0.5"
   }
 }
