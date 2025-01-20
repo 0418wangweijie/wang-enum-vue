@@ -1,4 +1,4 @@
-import { inject, provide } from 'vue';
+import { inject } from 'vue';
 
 const Constant = {};
 
@@ -33,7 +33,7 @@ Constant.install = (app, { enumInfo = {} } = {}) => {
      * @param {string} constantName 枚举名称
      * @returns {Array} 返回键值对数组
      */
-    getDescValueList: constantName => {
+    getDescValueList: (constantName) => {
       const constantItem = enumInfo[constantName];
       if (!constantItem) {
         return [];
@@ -51,9 +51,10 @@ Constant.install = (app, { enumInfo = {} } = {}) => {
 
 
 // 创建组合式 API hook
-export function useEnum() {
+const useEnum = () => {
   return inject(EnumContext);
 }
 
 
 export default Constant;
+export { EnumContext, useEnum };
