@@ -1,0 +1,12 @@
+{
+  "name": "wang-enum-vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": ["enum", "vue"],
+  "author": "wangweijie",
+  "license": "ISC",
+  "description": ""
+}
