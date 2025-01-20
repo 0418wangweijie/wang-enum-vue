@@ -1,13 +1,13 @@
 {
   "name": "wang-enum-vue",
   "version": "1.0.1",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0418wangweijie/wang-enum-vue.git"
   },
   "scripts": {
-    "test": "jest"
+    "build": "vite build"
   },
   "keywords": [
     "enum",
@@ -15,5 +15,12 @@
   ],
   "author": "wangweijie",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "vite": "^6.0.7",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1"
+  }
 }

@@ -1,9 +1,13 @@
-// 定义常量
-const Constant = {}
+import { inject, provide } from 'vue';
+
+const Constant = {};
+
+// 定义一个枚举上下文
+const EnumContext = Symbol('EnumContext');
 
 /**
  * 初始化安装实例
- * @param {Object} app Vue实例
+ * @param {Object} app Vue 实例
  * @param {Object} options 枚举集合
  * @param {Object} options.enumInfo 枚举信息
  */
@@ -17,40 +21,39 @@ Constant.install = (app, { enumInfo = {} } = {}) => {
      * @returns {string} 枚举描述
      */
     getDescByValue: (constantName, value) => {
-      const constantItem = enumInfo[constantName]
+      const constantItem = enumInfo[constantName];
       if (!constantItem) {
-        return ''
+        return '';
       }
-      const foundItem = Object.values(constantItem).find(item => item.value === value)
-      return foundItem ? foundItem.desc || '' : ''
+      const foundItem = Object.values(constantItem).find(item => item.value === value);
+      return foundItem? foundItem.desc || '' : '';
     },
-
     /**
      * 根据枚举名称获取对应的键值对
      * @param {string} constantName 枚举名称
      * @returns {Array} 返回键值对数组
      */
     getDescValueList: constantName => {
-      const constantItem = enumInfo[constantName]
+      const constantItem = enumInfo[constantName];
       if (!constantItem) {
-        return []
+        return [];
       }
       return Object.values(constantItem).map(item => ({
-        value: item.value ?? 0,
-        desc: item.desc ?? '',
-      }))
-    }
-  }
+        value: item.value?? 0,
+        desc: item.desc?? '',
+      }));
+    },
+  };
 
-  // 全局注入
-  app.config.globalProperties.$enum = Enum
-  // 提供给组合式API使用
-  app.provide('enum', Enum)
-}
+  // 注入枚举到 Vue 实例
+  app.provide(EnumContext, Enum);
+};
 
-// 创建组合式API hook
+
+// 创建组合式 API hook
 export function useEnum() {
-  return inject('enum')
+  return inject(EnumContext);
 }
 
-export default Constant
+
+export default Constant;

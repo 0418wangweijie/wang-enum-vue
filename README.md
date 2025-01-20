@@ -34,11 +34,10 @@ const app = createApp(App)
 // 初始化枚举信息，这里可以传入你的枚举信息对象
 const enumInfo = {
   // 示例枚举
-  Status: [
-    { value: 1, desc: 'Active' },
-    { value: 2, desc: 'Inactive' },
-    { value: 3, desc: 'Pending' }
-  ],
+  Status: {
+      ACTIVE: { value: 1, desc: 'Active' },
+      INACTIVE: { value: 0, desc: 'Inactive' },
+},
   // 可以添加更多的枚举信息
 }
 
@@ -90,28 +89,21 @@ export default {
 ```vue
 <template>
   <div>
-    <p>枚举描述: {{ getEnumDesc }}</p>
-    <p>枚举列表: {{ enumList }}</p>
+    <p>{{ enumValue.getDescByValue('STATUS', 1) }}</p>
   </div>
 </template>
 
 <script>
-import { useEnum } from 'wang-enum-vue'
-import { inject } from 'vue'
+  import { useEnum } from 'wang-enum-vue';
 
-export default {
-  name: 'YourComponent',
-  setup() {
-    const Enum = useEnum() || inject('enum')
-    const getEnumDesc = Enum.getDescByValue('Status', 2)
-    const enumList = Enum.getDescValueList('Status')
-
-    return {
-      getEnumDesc,
-      enumList
-    }
-  }
-}
+  export default {
+    setup() {
+      const enumValue = useEnum();
+      return {
+        enumValue,
+      };
+    },
+  };
 </script>
 ```
 
@@ -179,7 +171,7 @@ const enumList = Enum.getDescValueList('Status')
 
 ## 许可证
 
-这个库使用 MIT 许可证。
+这个库使用 ISC 许可证。
 
 
 ## 作者
