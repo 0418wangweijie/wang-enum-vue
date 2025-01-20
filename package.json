@@ -1,8 +1,11 @@
 {
   "name": "wang-enum-vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.mjs",
-  "files": [ "dist", "package.json"],
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0418wangweijie/wang-enum-vue.git"
