@@ -1,7 +1,7 @@
 {
   "name": "wang-enum-vue",
   "version": "1.0.4",
-  "main": "dist/index.mjs",
+  "main": "dist/index.js",
   "files": [
     "dist",
     "package.json"
