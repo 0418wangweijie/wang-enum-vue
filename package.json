@@ -2,6 +2,10 @@
   "name": "wang-enum-vue",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0418wangweijie/wang-enum-vue.git"
+  },
   "scripts": {
     "test": "jest"
   },
