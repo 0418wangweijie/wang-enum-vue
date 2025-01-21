@@ -10,18 +10,20 @@ export default defineConfig({
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
         filenameHash: false,
-        libraryTarget: 'umd',
     },
     lib: [
         {
             format: 'umd',
             umdName: 'wang-enum-vue',
+            output: {
+                externals: {
+                    vue: 'Vue'
+                }
+            }
         },
     ],
     source: {
-        transformImport: [
-
-        ],
+        transformImport: [],
         treeShaking: true
     },
     tools: {
