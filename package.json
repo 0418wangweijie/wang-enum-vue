@@ -11,7 +11,7 @@
     "url": "git+https://github.com/0418wangweijie/wang-enum-vue.git"
   },
   "scripts": {
-    "build": "rsbuild build"
+    "build": "rslib build --config rslib.config.mjs"
   },
   "keywords": [
     "enum",
@@ -19,12 +19,12 @@
   ],
   "author": "wangweijie",
   "license": "ISC",
-  "description": "",
+  "description": "A Vue library for managing enums",
   "dependencies": {
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.1.13",
-    "@rsbuild/plugin-vue": "^1.0.5"
+    "@rsbuild/plugin-vue": "^1.0.5",
+    "@rslib/core": "^0.3.2"
   }
 }
