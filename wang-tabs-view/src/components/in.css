@@ -1,0 +1,114 @@
+.tabs-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #5c9cf5;
+  border-radius: 16px;
+}
+
+.tabs-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tab-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.tab-item h2 {
+  font-size: 24px;
+  margin: 0 0 8px;
+  color: #333;
+}
+
+.tab-item p {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+}
+
+/* 左右选项卡基础样式 */
+.left-tab {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.right-tab {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+/* 未激活状态文字颜色 */
+.tab-item:not(.active) {
+  height: 90px;
+  align-self: flex-end;
+  background-color: #d1e3fc;
+}
+
+.tab-item:not(.active) h2 {
+  color: #666;
+}
+
+.tab-item:not(.active) p {
+  color: #888;
+}
+
+.tab-item.active {
+  height: 120px;
+  background-color: #fff;
+}
+
+.tab-item.active h2 {
+  color: #333;
+}
+
+.tab-item.active p {
+  color: #666;
+}
+
+/* 贝塞尔曲线连接实现 */
+.tabs-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 60px;
+  height: 120px;
+  background-color: #fff;
+  transform: translateX(-50%);
+  clip-path: path('M0,0 C15,10 45,10 60,0 L60,90 C45,80 15,80 0,90 Z');
+  z-index: 0;
+}
+
+/* 确保选中和未选中状态的背景色 */
+.left-tab.active, .right-tab.active {
+  background-color: #fff;
+}
+
+.left-tab:not(.active), .right-tab:not(.active) {
+  background-color: #d1e3fc;
+}
+
+/* 当左侧激活右侧未激活时调整曲线 */
+.left-tab.active + .right-tab:not(.active) ~ .tabs-wrapper::after {
+  background-color: #fff;
+  clip-path: path('M0,0 C15,10 45,10 60,0 L60,90 C45,80 15,80 0,90 Z');
+}
+
+/* 当右侧激活左侧未激活时调整曲线 */
+.left-tab:not(.active) + .right-tab.active ~ .tabs-wrapper::after {
+  background-color: #fff;
+  clip-path: path('M0,0 C15,10 45,10 60,0 L60,90 C45,80 15,80 0,90 Z');
+}

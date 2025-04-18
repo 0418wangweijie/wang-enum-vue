@@ -1,0 +1,106 @@
+:root {
+  --tab-height: 152px;
+    --tab-container-height: 172px;
+    --active-color: #4096ff;
+    --font-color: #FFFFFF;
+    --container-color: #FFFFFF;
+    --primary-color: #bae0ff;
+    --border-radius: 35px;
+    --font-size: 44px;
+}
+
+@mixin tabSelected($bgColor, $skewX,$mT) {
+  position: absolute;
+  width: 45px;
+  height: var(--tab-height);
+  margin-top: $mT;
+  background: $bgColor;
+  transform: skewX($skewX);
+}
+
+.tabListCnt {
+  position: sticky;
+  top: 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  background-color: var(--container-color);
+  overflow: hidden;
+  z-index: 2;
+  height: var(--tab-container-height);
+}
+
+.tabList {
+  position: relative;
+  display: flex;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  width: 100%;
+  height: var(--tab-height);
+  margin-top: 20px;
+
+  .tabItem {
+    position: relative;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 20%;
+    height: var(--tab-height);
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1;
+    background: var(--primary-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+
+  .selectTabItem{
+    background: var(--active-color);
+    z-index: 3;
+  }
+
+  .tabSelected {
+    position: absolute;
+    width: var(--tab-width);
+    height: var(--tab-container-height);
+    background: var(--active-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    box-shadow: 70px 117px 0 var(--active-color), -70px 117px 0 0 var(--active-color),
+                2px -2px 1px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    z-index: 2;
+    transition: .1s ease-in-out;
+    margin-top: -16px;
+
+    .left {
+      @include tabSelected(var(--primary-color), -15deg,16px);
+      left: -64px;
+      border-bottom-right-radius: var(--border-radius);
+      box-shadow: inset -5px 0 5px rgba(0, 0, 0, 0.15);
+      z-index: 4;
+    }
+
+    .right {
+      @include tabSelected(var(--primary-color), 15deg,16px);
+      right: -64px;
+      border-bottom-left-radius: var(--border-radius);
+      box-shadow: inset  5px 0 5px rgba(0, 0, 0, 0.15);
+      z-index: 4;
+    }
+  }
+
+  .tabSelected::before {
+    content: '';
+    @include tabSelected(var(--active-color), -15deg,0);
+    left: -22px;
+    border-top-left-radius: var(--border-radius);
+    box-shadow: -2px 0 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .tabSelected::after {
+    content: '';
+    @include tabSelected(var(--active-color), 15deg,0);
+    right: -22px;
+    border-top-right-radius: var(--border-radius);
+    box-shadow: 2px 0 0 rgba(0, 0, 0, 0.15);
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>接送机服务</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .tab-container {
+            width: 690px;
+            height: 72px;
+            background: #F2F4F7;
+            border-radius: 36px;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 500;
+            color: #8E9199;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            flex-direction: column;
+        }
+        
+        .tab.active {
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .tab::after {
+            content: '';
+            width: 40px;
+            height: 4px;
+            background: transparent;
+            margin-top: 4px;
+            border-radius: 2px;
+        }
+        
+        .tab.active::after {
+            background: #000;
+        }
+        
+        .tab-slider {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: white;
+            top: 0;
+            border-radius: 36px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            z-index: 1;
+        }
+        
+        .tab:first-child.active ~ .tab-slider {
+            border-radius: 36px;
+            border-top-right-radius: 100px 120px;
+            border-bottom-right-radius: 100px 120px;
+        }
+        
+        .tab:last-child.active ~ .tab-slider {
+            border-radius: 36px;
+            border-top-left-radius: 100px 120px;
+            border-bottom-left-radius: 100px 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tab-slider"></div>
+        <div class="tab active">接机</div>
+        <div class="tab">送机</div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const tabSlider = document.querySelector('.tab-slider');
+        
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                tabSlider.style.transform = index === 0 
+                    ? 'translateX(0%)' 
+                    : 'translateX(100%)';
+            });
+        });
+    </script>
+</body>
+</html>

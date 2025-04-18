@@ -1,0 +1,191 @@
+:root {
+  --tab-height: 52px;
+  --active-color: #ffffff;
+  --default-color: #ede6f2;
+  --container-bg-color: #c8d0da;
+  --primary-color: #844ca8;
+  --border-radius: 12px;
+  --font-size: 16px;
+  --tab-width: 50%;
+}
+
+@mixin tabSelected($bgColor, $skewX) {
+  position: absolute;
+  width: 20px;
+  height: var(--tab-height);
+  background: $bgColor;
+  transform: skewX($skewX);
+}
+
+.container {
+  width: 100%;
+  background-color: black;
+
+  .wrapper {
+    max-width: 28rem; // md is typically 28rem in Tailwind
+    margin: 0 auto;
+
+    .tabHeader {
+      position: relative;
+      height: 4rem;
+
+      .tab {
+        position: absolute;
+        width: 50%;
+        z-index: 10;
+        transition: all 0.3s ease-in-out;
+
+        &.pickup {
+          left: 0;
+        }
+
+        &.dropoff {
+          right: 0;
+        }
+
+        &.active {
+          top: 0;
+          z-index: 20;
+        }
+
+        &.inactive {
+          top: 0.75rem;
+        }
+
+        .tabContent {
+          width: 100%;
+          padding: 1.25rem 0;
+          text-align: center;
+          font-weight: 500;
+          font-size: 1.25rem;
+          position: relative;
+
+          &.active {
+            background-color: white;
+          }
+
+          &.inactive {
+            background-color: #f3f4f6; // gray-100
+          }
+
+          &.pickupTab {
+            border-top-left-radius: 1rem;
+            
+            &.active {
+              clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+            }
+            
+            &.inactive {
+              clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+          }
+
+          &.dropoffTab {
+            border-top-right-radius: 1rem;
+            
+            &.active {
+              clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            
+            &.inactive {
+              clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+          }
+
+          .indicator {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2rem;
+            height: 0.25rem;
+            background-color: black;
+          }
+        }
+      }
+    }
+
+    .tabContent {
+      background-color: white;
+      padding: 1.5rem;
+
+      .contentText {
+        text-align: center;
+        color: #6b7280; // gray-500
+      }
+    }
+  }
+}
+
+.tabListCnt {
+  position: relative;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  background-color: var(--container-bg-color);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.tabList {
+  position: relative;
+  display: flex;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  width: 100%;
+  height: var(--tab-height);
+
+  .tabItem {
+    position: relative;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: var(--tab-height);
+    color: var(--primary-color);
+    font-size: var(--font-size);
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1;
+    background-color: var(--default-color);
+  }
+
+  .tabSelected {
+    position: absolute;
+    height: var(--tab-height);
+    background: var(--active-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    opacity: 1;
+    z-index: 0;
+    transition: .3s ease-in-out;
+
+    .left {
+      @include tabSelected(var(--container-bg-color), -15deg);
+      left: -10px;
+    }
+
+    .right {
+      @include tabSelected(var(--container-bg-color), 15deg);
+      right: -10px;
+    }
+  }
+
+  .tabSelected::before {
+    content: '';
+    @include tabSelected(var(--active-color), -15deg);
+    left: -10px;
+  }
+
+  .tabSelected::after {
+    content: '';
+    @include tabSelected(var(--active-color), 15deg);
+    right: -10px;
+  }
+}
+
+.tabContent {
+  background-color: var(--active-color);
+  padding: 20px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.contentText {
+  text-align: center;
+} 

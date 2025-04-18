@@ -1,0 +1,28 @@
+{
+  "name": "wang-tabs-view",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev --open",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "wang-tabs": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.2.16",
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@rsbuild/plugin-sass": "^1.2.2",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "css-loader": "^6.8.1",
+    "postcss-loader": "^8.1.0",
+    "postcss-pxtorem": "^6.1.0",
+    "style-loader": "^3.3.3",
+    "typescript": "^5.8.2"
+  }
+}
