@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import TabsView from "./components";
 
 const App = () => {

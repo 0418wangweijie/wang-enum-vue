@@ -1,0 +1,83 @@
+.elevatedSlopeTabsRoot {
+  --tab-count: 3;
+  --wrap-bg: #eee;
+  --tab-width: calc(375 / var(--tab-count));
+  --active-before-after-width: 50px;
+  --active-filter: ''; //drop-shadow(-1px 0px 2px rgba(0, 0, 0, 0.7)) drop-shadow(1px 0px 2px rgba(0, 0, 0, 0.7))
+}
+
+.elevatedSlopeTabs {
+  background-color: var(--wrap-bg);
+  width: 375px;
+  margin: 0 auto;
+  padding: 10px;
+
+  .tabs {
+    display: flex;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(#cdd9fe, #e2e9fd);
+    position: relative;
+
+    .tab {
+      display: flex;
+      justify-content: center;
+      height: 50px;
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+      line-height: 50px;
+      z-index: 1;
+      overflow: hidden;
+      width: calc(100% / var(--tab-count));
+
+      .tabLabel {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .activeMarker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: calc(100% / var(--tab-count));
+      background-color: #fff;
+      color: #4185ef;
+      transition: transform 0.3s ease;
+      filter: var(--active-filter);
+
+      &:before {
+        display: var(--active-before-display, flex);
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -48px;
+        height: 100%;
+        width: 50px;
+        z-index: 2;
+        background-color: #fff;
+        clip-path: path('M 0,50 C 25,50 25,0 50,0 L 50, 50 Z');
+      }
+
+      &:after {
+        display: var(--active-after-display, flex);
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -48px;
+        height: 100%;
+        width: 50px;
+        z-index: 2;
+        background-color: #fff;
+        clip-path: path('M 0,0 C 25,0 25,50 50,50 L 0, 50 Z');
+      }
+    }
+  }
+
+  .contentWrap {
+    min-height: 200px;
+    background-color: #fff;
+  }
+}

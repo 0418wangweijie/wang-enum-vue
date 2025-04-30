@@ -3,6 +3,12 @@ import React,{useState, useRef, useEffect} from 'react';
 import Tabs from './Tabs';
 import {SlopeTabs} from "wang-tabs";
 import ElevatedSlopeTabs from "./ElevatedSlopeTabs";
+import TrapezoidTabs from './TrapezoidTabs';
+import NewSlopeTabs from './NewSlopeTabs';
+import NewSolpeTabs2 from "./NewSolpeTabs2";
+import ElevatedSlopeTabs2 from "./ElevatedSlopeTabs2";
+import ElevatedSlopeTabs3 from "./ElevatedSlopeTabs3";
+// import DirectSlopeTabs from './DirectSlopeTabs';
 // import CanvasTabs from './CanvasTabs';
 // import InvestmentStrategy from './in';
 // import TabNavigation from './TabNav';
@@ -11,8 +17,9 @@ const Index = () => {
 	const [activeTab, setActiveTab] = useState('home');
 
 	const tabList = [
-		{ name: 'home1', label: 'Homenidef', icon: 'home' },
+		{ name: 'home1', label: 'Home', icon: 'home' },
 		{ name: 'home', label: 'Home', icon: 'home' },
+		{ name: 'home2', label: 'Home', icon: 'home' },
 		// { name: 'profile', label: 'Profile', icon: 'user',render:()=>(
 		// 	<div style={{
 				
@@ -28,52 +35,66 @@ const Index = () => {
 	return (
 		<div style={{
 			// width:'50%'
-			height:'100vh',
-			background:'#fff',
-			marginTop:50
+			height: '100vh',
+			background: '#fff',
+			marginTop: 50
 		}}>
-		{/*	<Tabs*/}
-		{/*	tabList={tabList}*/}
-		{/*	activeTab={activeTab}*/}
-		{/*	style={{*/}
-		{/*		// '--active-color': '#999',*/}
-		{/*		// '--active-tab-height': '5.9rem'*/}
-		{/*	}}*/}
-		{/*	onTabChange={setActiveTab}*/}
-		{/*/>*/}
+			{/*<div style={{marginBottom: 10}}>*/}
+			{/*	<ElevatedSlopeTabs2 tabList={tabList}/>*/}
+			{/*</div>*/}
+			<div style={{marginBottom: 10,height:600,background: '#999',padding:10}}>
+				<ElevatedSlopeTabs3 tabList={tabList}/>
+			</div>
 
-			<ElevatedSlopeTabs tabList={tabList} activeTab={activeTab} onTabChange={setActiveTab}
-				style={{
-					'--tab-container-height': '3.57rem',
-					'--tab-height': '2.85rem',
-				}}
+			<div style={{marginBottom: 10}}>
+				<NewSlopeTabs/>
+			</div>
+			{/*	<Tabs*/}
+			{/*	tabList={tabList}*/}
+			{/*	activeTab={activeTab}*/}
+			{/*	style={{*/}
+			{/*		// '--active-color': '#999',*/}
+			{/*		// '--active-tab-height': '5.9rem'*/}
+			{/*	}}*/}
+			{/*	onTabChange={setActiveTab}*/}
+			{/*/>*/}
+
+			{/*<ElevatedSlopeTabs tabList={tabList} activeTab={activeTab} onTabChange={setActiveTab}*/}
+			{/*				   style={{*/}
+			{/*					   // '--tab-container-height': '3.57rem',*/}
+			{/*					   // '--tab-height': '2.85rem',*/}
+			{/*				   }}*/}
 
 
-			/>
+			{/*/>*/}
 
-		<div>
+			<div>
 
-			{/* <InvestmentStrategy/> */}
-		</div>
-		<div style={{
-				marginTop:20
+				{/* <InvestmentStrategy/> */}
+			</div>
+			<div style={{
+				marginTop: 20
 			}}>
-		{/* <CanvasTabs
+				{/* <CanvasTabs
             tabList={tabList}
             activeTab={activeTab}
             onTabChange={setActiveTab}
         /> */}
-		</div>
+
+				{/*<TrapezoidTabs tabList={tabList} activeTab={activeTab} onTabChange={setActiveTab}/>*/}
+			</div>
 			<div style={{
-				marginTop:20
+				marginTop: 20
 			}}>
 				<SlopeTabs tabList={tabList} activeTab={activeTab} onTabChange={setActiveTab} style={{
-					// '--active-color': '#999',
+					'--active-color': '#4096ff'
 				}}/>
+
+				{/* <DirectSlopeTabs tabList={tabList} activeTab={activeTab} onTabChange={setActiveTab}/> */}
 				<div>1111111111</div>
 			</div>
 			<div style={{
-				marginTop:20
+				marginTop: 20
 			}}>
 				{/* <TabNavigation/> */}
 			</div>

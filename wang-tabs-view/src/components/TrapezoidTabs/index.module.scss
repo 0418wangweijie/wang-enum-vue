@@ -1,0 +1,163 @@
+// 确保类名与TSX文件中引用的完全一致
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f5f9ff;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabsWrapper {
+  display: flex;
+  width: 100%;
+  // 将背景色移到 .tab 上，容器本身不需要背景色
+  // background-color: #f0f0f0;
+  position: relative; // 添加相对定位，以便伪元素定位
+  padding-top: 10px; // 为顶部的曲线效果留出空间
+  background-color: #f5f9ff; // 容器背景与页面背景一致
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 16px;
+  color: #666; // 未选中颜色调暗
+  background-color: #f0f0f0; // 未选中背景色
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; // 平滑过渡
+  position: relative;
+  user-select: none;
+  border-top-left-radius: 8px; // 给未选中标签也加上圆角
+  border-top-right-radius: 8px;
+  z-index: 1; // 默认层级
+}
+
+// 修改为.active以匹配TSX中的引用
+.active {
+  background-color: white; // 选中背景色
+  color: #333; // 选中文字颜色
+  font-weight: 500;
+  z-index: 3; // 提高选中标签层级
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  // 移除之前的顶边框
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   height: 3px;
+  //   background-color: #ff4d4f;
+  // }
+
+  // 创建左侧曲线连接
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -10px; // 向左偏移以创建曲线
+    width: 10px; // 曲线宽度
+    height: 10px; // 曲线高度
+    background-color: transparent; // 透明背景
+    border-bottom-right-radius: 10px; // 右下角圆角形成曲线
+    box-shadow: 0 5px 0 0 white; // 使用白色阴影填充曲线区域，颜色与 active 背景一致
+    z-index: 2;
+  }
+
+  // 创建右侧曲线连接
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: -10px; // 向右偏移以创建曲线
+    width: 10px; // 曲线宽度
+    height: 10px; // 曲线高度
+    background-color: transparent; // 透明背景
+    border-bottom-left-radius: 10px; // 左下角圆角形成曲线
+    box-shadow: 0 5px 0 0 white; // 使用白色阴影填充曲线区域
+    z-index: 2;
+  }
+}
+
+// 针对第一个和最后一个标签的特殊处理，防止曲线超出边界
+.tab:first-child.active::before,
+.tab:last-child.active::after {
+  display: none; // 第一个标签的左侧和最后一个标签的右侧不需要曲线
+}
+
+
+.content {
+  padding: 20px;
+  background-color: white; // 内容区域背景色与 active tab 一致
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  border-bottom-left-radius: 12px; // 底部圆角与 container 匹配
+  border-bottom-right-radius: 12px;
+  position: relative; // 确保内容区域在标签下方
+  z-index: 2; // 层级低于 active tab，但高于 inactive tab
+  margin-top: -1px; // 轻微上移，消除可能的缝隙
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+// 将arrow从嵌套移到顶层
+.arrow {
+  color: #999;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.cardWrapper {
+  width: 100%;
+  margin: 15px 0 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.cardImage {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.button {
+  width: 100%;
+  padding: 15px 0;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: auto;
+  
+  &:hover {
+    background-color: #40a9ff;
+  }
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: #999;
+  font-size: 16px;
+}

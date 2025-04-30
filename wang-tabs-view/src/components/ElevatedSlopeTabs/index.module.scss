@@ -45,14 +45,15 @@
     align-items: center;
     flex-basis: 20%;
     height: var(--tab-height);
-    color: var(--default-color);
+    // Ensure --default-color is defined in :root or provide a fallback
+    color: var(--default-color, #666); 
     font-size: var(--font-size);
     font-weight: 600;
     cursor: pointer;
     background: var(--primary-color);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     overflow: hidden;
-    z-index: 1;
+    z-index: 1; // Keep this low
 
     .tabLabel {
       position: absolute;
@@ -64,11 +65,14 @@
       justify-content: center;
       align-items: center;
       width: 80%;
+      margin: 0 auto;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       text-align: center;
-      z-index: 99;
+      // Remove or significantly lower the z-index here
+      // z-index: 99; // <--- Remove this line
+      // The label should naturally be within the tabItem's stacking context (z-index: 1)
     }
   }
 
@@ -83,7 +87,7 @@
       calc(var(--tab-height) * 0.46) calc(var(--tab-height) * 0.77) 0 var(--active-color), 
       calc(var(--tab-height) * -0.46) calc(var(--tab-height) * 0.77) 0 0 var(--active-color);
     opacity: 1;
-    z-index: 2;
+    z-index: 5; // Covers inactive tabItem (z-index: 1)
     transition: .3s ease-in-out;
     margin-top: calc(-1 * var(--tab-height-offset));
     top: 0;
@@ -93,18 +97,32 @@
       pointer-events: none;
     }
 
+    .activeTabContent {
+      position: absolute;
+      top: var(--tab-height-offset); // Position relative to tabSelected
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // Ensure --font-color contrasts with --active-color
+      color: var(--font-color); 
+      font-size: var(--font-size);
+      z-index: 6; // Ensures text is above tabSelected background (z-index: 5)
+      pointer-events: none; // Ensure text doesn't block clicks if needed
+    }
+
     .left {
       @include tabSelected(var(--primary-color), -15deg, var(--tab-height-offset));
       left: calc(var(--tab-height) * -0.40);
       border-bottom-right-radius: var(--border-radius);
-      //box-shadow: inset -5px 0 0 rgba(0, 0, 0, 0.15);
     }
 
     .right {
       @include tabSelected(var(--primary-color), 15deg, var(--tab-height-offset));
       right: calc(var(--tab-height) * -0.40);
       border-bottom-left-radius: var(--border-radius);
-      //box-shadow: inset  5px 0 0 rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -122,8 +140,13 @@
     border-top-right-radius: var(--border-radius);
   }
 
+  // Comment out or remove .selectTabItem styles if they are remnants from previous attempts
+  /*
   .selectTabItem {
-    z-index: 1;
+    z-index: 4;
+    background-color: var(--active-color);
+    color: var(--font-color);
+    // transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     .tabLabel {
       position: absolute;
@@ -137,6 +160,8 @@
       opacity: 1;
       pointer-events: auto;
       color: var(--font-color);
+      z-index: 6;
     }
   }
+  */
 }

@@ -1,0 +1,105 @@
+// --- 基础变量和容器样式 (与原文件类似) ---
+.directSlopeTabsRoot {
+  --tab-container-height: 172px;
+  --tab-height-offset: 20px;
+  --tab-height: calc(var(--tab-container-height) - var(--tab-height-offset));
+  --active-color: #4096ff;
+  --font-color: #FFFFFF;
+  --container-color: #FFFFFF;
+  --primary-color: #bae0ff;
+  --default-font-color: #333; // 添加默认字体颜色变量
+  --border-radius: 35px;
+  --font-size: 44px;
+  --transition-duration: 0.3s; // 过渡时间变量
+}
+
+.tabListCnt {
+  position: sticky;
+  top: 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  background-color: var(--container-color);
+  overflow: hidden; // 隐藏容器外部的伪元素部分
+  height: var(--tab-container-height);
+}
+
+.tabList {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: var(--tab-container-height); // 列表高度为容器高度
+  // margin-top: var(--tab-height-offset); // 不再需要整体下移
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+// --- Tab Item 基础样式 ---
+.tabItem {
+  position: relative; // 用于伪元素定位和 z-index
+  display: flex;
+  flex-grow: 1; // 允许伸缩
+  justify-content: center;
+  align-items: center; // 垂直居中内容
+  height: var(--tab-height); // 默认高度
+  margin-top: var(--tab-height-offset); // 默认下移
+  padding: 0 10px;
+  color: var(--default-font-color); // 默认文字颜色
+  font-size: var(--font-size);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--primary-color); // 默认背景色
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden; // 隐藏内部溢出内容
+  z-index: 1;
+  transition: background-color var(--transition-duration) ease,
+              color var(--transition-duration) ease,
+              margin-top var(--transition-duration) ease,
+              height var(--transition-duration) ease;
+
+  .tabLabel {
+    position: relative; // 使其能设置 z-index
+    z-index: 1; // 确保文字在伪元素之上
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%; // 标签宽度占满
+  }
+}
+
+// --- 选中的 Tab Item 样式 ---
+.selectTabItem {
+  height: var(--tab-container-height); // 选中时变高
+  margin-top: 0; // 选中时上移到顶部
+  background-color: var(--active-color); // 选中时背景色
+  color: var(--font-color); // 选中时文字颜色
+  z-index: 2; // 选中时层级更高
+  overflow: visible; // 允许伪元素显示在外部
+
+  // --- 使用伪元素创建倾斜效果 ---
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; // 与顶部对齐
+    width: calc(var(--tab-height) * 0.5); 
+    height: var(--tab-container-height); // 高度与选中项一致
+    background-color: var(--active-color); // 背景色与选中项一致
+    z-index: -1; // 放在内容之后，但在父级背景之上
+    transition: background-color var(--transition-duration) ease; // 背景色过渡
+  }
+
+  &::before {
+    left: calc(var(--tab-height) * -0.2); 
+    transform: skewX(-15deg); // 向左倾斜
+    transform-origin: top left; // 设置倾斜原点
+    border-top-left-radius: var(--border-radius); // 左上外圆角
+    border-bottom-right-radius: var(--border-radius); // 右下内圆角
+  }
+
+  &::after {
+    right: calc(var(--tab-height) * -0.2); 
+    transform: skewX(15deg); // 向右倾斜
+    transform-origin: top right; // 设置倾斜原点
+    border-top-right-radius: var(--border-radius); // 右上外圆角
+    border-bottom-left-radius: var(--border-radius); // 左下内圆角
+  }
+}

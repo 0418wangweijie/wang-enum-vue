@@ -1,0 +1,80 @@
+.elevatedSlopeTabsRoot {
+  --tabs-bg: linear-gradient(#cdd9fe, #e2e9fd);
+  --tabs-height: 50px;
+  --tabs-radius: 8px;
+  --tab-font-size: 16px;
+  --active-before-after-width: 50px;
+  --active-filter: ''; //drop-shadow(-1px 0px 2px rgba(0, 0, 0, 0.7)) drop-shadow(1px 0px 2px rgba(0, 0, 0, 0.7))
+  --active-transition: ''; // .3s ease-in-out
+  --active-top: -6px;
+  --active-height: 50px;
+  --content-top: var(--active-top)
+}
+
+.elevatedSlopeTabs {
+  margin: 0 auto;
+
+  .tabs {
+    display: flex;
+    width: 100%;
+    border-radius: var(--tabs-radius) var(--tabs-radius) 0 0;
+    background: var(--tabs-bg);
+  }
+
+  .tab {
+    height: var(--tabs-height);
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    line-height: var(--tabs-height);
+    z-index: 1;
+    width: calc(100% / var(--tab-count));
+
+    .tabLabel {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .tab.active {
+    margin-top: var(--active-top);
+    height: var(--active-height);
+    background-color: #fff;
+    color: #4185ef;
+    transition: var(--active-transition);
+    border-top-left-radius: var(--active-left-radius);
+    border-top-right-radius: var(--active-right-radius);
+  }
+
+  .tab.active:before {
+    display: var(--active-before-display, flex);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -49px;
+    height: 100%;
+    width: var(--active-before-after-width);
+    z-index: 2;
+    background-color: var(--active-bg-color, #fff);
+    clip-path: path('M 0,50 C 25,50 25,0 50,0 L 50, 50 Z');
+  }
+
+  .tab.active:after {
+    display: var(--active-after-display, flex);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -49px;
+    height: 100%;
+    width: var(--active-before-after-width);
+    z-index: 2;
+    background-color: var(--active-bg-color, #fff);
+    clip-path: path('M 0,0 C 25,0 25,50 50,50 L 0, 50 Z');
+  }
+
+  .contentWrap {
+    margin-top: calc(var(--content-top));
+    min-height: 200px;
+    background-color: #fff;
+  }
+}
